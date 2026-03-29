@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { FaBars, FaCircleUser, FaMoon, FaSun, FaXmark } from 'react-icons/fa6';
+import { FaBars, FaMoon, FaSun, FaXmark } from 'react-icons/fa6';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { navItems } from '../utils/content';
 import { useTheme } from '../hooks/useTheme';
@@ -115,11 +115,8 @@ function Navbar() {
         <a
           href="#home"
           onClick={(event) => handleNavClick(event, '#home')}
-          className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-(--heading-color) md:text-base"
+          className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.16em] text-(--heading-color) md:text-base"
         >
-          <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-(--border-color) bg-(--surface-elevated) text-sm text-(--brand)">
-            <FaCircleUser />
-          </span>
           Manish Dutt Loan Services
         </a>
 
