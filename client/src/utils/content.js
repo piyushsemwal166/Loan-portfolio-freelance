@@ -86,7 +86,7 @@ export const partnerBanks = [
 ];
 
 export const achievements = [
-  { label: 'Loans Processed', value: 1800, suffix: '+' },
+  { label: 'Loans Processed', value: 2500, suffix: '+' },
   { label: 'Happy Clients', value: 3500, suffix: '+' },
   { label: 'Insurance Wins', value: 450, suffix: '+' },
   { label: 'Cities Served', value: 18, suffix: '+' },
