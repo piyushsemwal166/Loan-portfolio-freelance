@@ -39,7 +39,7 @@ function HeroSection() {
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
             <span className="rounded-full border border-(--border-color) bg-(--surface-elevated) px-3 py-1 text-xs font-semibold text-(--heading-color)">
-              1200+ Clients Guided
+              3500+ Clients Guided
             </span>
             <span className="rounded-full border border-(--border-color) bg-(--surface-elevated) px-3 py-1 text-xs font-semibold text-(--heading-color)">
               ROI-Focused Planning

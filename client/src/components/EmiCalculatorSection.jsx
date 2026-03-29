@@ -24,19 +24,9 @@ function AnimatedCurrency({ value }) {
 }
 
 function EmiCalculatorSection() {
-  const [activeCalculator, setActiveCalculator] = useState('slider');
-
   const [loanAmount, setLoanAmount] = useState(100000);
   const [interestRate, setInterestRate] = useState(6.5);
   const [tenureYears, setTenureYears] = useState(5);
-
-  const [manualLoanAmount, setManualLoanAmount] = useState('100000');
-  const [manualInterestRate, setManualInterestRate] = useState('8.25');
-  const [manualTenureYears, setManualTenureYears] = useState('15');
-
-  const parsedManualLoanAmount = Number(manualLoanAmount) || 0;
-  const parsedManualInterestRate = Number(manualInterestRate) || 0;
-  const parsedManualTenureYears = Number(manualTenureYears) || 0;
 
   const result = useMemo(
     () =>
@@ -51,16 +41,6 @@ function EmiCalculatorSection() {
   const principalPercent = result.totalPayment > 0 ? (loanAmount / result.totalPayment) * 100 : 0;
   const interestPercent = result.totalPayment > 0 ? (result.totalInterest / result.totalPayment) * 100 : 0;
 
-  const manualResult = useMemo(
-    () =>
-      calculateEmiBreakdown({
-        loanAmount: parsedManualLoanAmount,
-        annualInterestRate: parsedManualInterestRate,
-        tenureYears: parsedManualTenureYears,
-      }),
-    [parsedManualInterestRate, parsedManualLoanAmount, parsedManualTenureYears],
-  );
-
   return (
     <section id="calculator" className="px-4 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-7xl rounded-3xl border border-(--border-color) bg-(--surface-elevated) p-8 md:p-12">
@@ -70,37 +50,13 @@ function EmiCalculatorSection() {
           description="Groww-style calculator with high variable limits so users can model larger loans and longer tenures."
         />
 
-        <div className="mb-8 flex justify-center">
-          <div className="inline-flex rounded-full border border-(--border-color) bg-(--surface) p-1">
-            <button
-              type="button"
-              onClick={() => setActiveCalculator('slider')}
-              className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition ${
-                activeCalculator === 'slider' ? 'bg-(--brand) text-white' : 'text-(--text-muted)'
-              }`}
-            >
-              Slider Calculator
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveCalculator('manual')}
-              className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition ${
-                activeCalculator === 'manual' ? 'bg-(--brand) text-white' : 'text-(--text-muted)'
-              }`}
-            >
-              Manual Calculator
-            </button>
-          </div>
-        </div>
-
-        {activeCalculator === 'slider' ? (
-          <motion.div
-            key="slider-calculator"
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="rounded-2xl border border-(--border-color) bg-(--surface) p-6 md:p-8"
-          >
+        <motion.div
+          key="slider-calculator"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="rounded-2xl border border-(--border-color) bg-(--surface) p-6 md:p-8"
+        >
             <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
               <div className="space-y-8">
                 <label className="block">
@@ -199,94 +155,7 @@ function EmiCalculatorSection() {
                 </div>
               </div>
             </div>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="manual-calculator"
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="rounded-2xl border border-(--border-color) bg-(--surface) p-6 md:p-8"
-          >
-          <h3 className="mb-6 text-xl font-semibold text-(--heading-color)">Manual EMI Calculator</h3>
-
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="space-y-4">
-              <label className="block">
-                <span className="text-sm font-medium text-(--heading-color)">Loan Amount</span>
-                <input
-                  type="number"
-                  min="0"
-                  step="10000"
-                  value={manualLoanAmount}
-                  onChange={(event) => setManualLoanAmount(event.target.value)}
-                  onFocus={(event) => {
-                    if (event.target.value === '0') {
-                      setManualLoanAmount('');
-                    }
-                  }}
-                  className="mt-2 w-full rounded-xl border border-(--border-color) bg-(--surface-elevated) px-4 py-3 text-base text-(--heading-color) outline-none transition focus:border-(--brand)"
-                />
-              </label>
-
-              <label className="block">
-                <span className="text-sm font-medium text-(--heading-color)">Rate of Interest (p.a)</span>
-                <input
-                  type="number"
-                  min="0"
-                  max="50"
-                  step="0.01"
-                  value={manualInterestRate}
-                  onChange={(event) => setManualInterestRate(event.target.value)}
-                  onFocus={(event) => {
-                    if (event.target.value === '0') {
-                      setManualInterestRate('');
-                    }
-                  }}
-                  className="mt-2 w-full rounded-xl border border-(--border-color) bg-(--surface-elevated) px-4 py-3 text-base text-(--heading-color) outline-none transition focus:border-(--brand)"
-                />
-              </label>
-
-              <label className="block">
-                <span className="text-sm font-medium text-(--heading-color)">Loan Tenure (Years)</span>
-                <input
-                  type="number"
-                  min="1"
-                  max="50"
-                  step="1"
-                  value={manualTenureYears}
-                  onChange={(event) => setManualTenureYears(event.target.value)}
-                  onFocus={(event) => {
-                    if (event.target.value === '0') {
-                      setManualTenureYears('');
-                    }
-                  }}
-                  className="mt-2 w-full rounded-xl border border-(--border-color) bg-(--surface-elevated) px-4 py-3 text-base text-(--heading-color) outline-none transition focus:border-(--brand)"
-                />
-              </label>
-            </div>
-
-            <div className="space-y-3 rounded-2xl border border-(--border-color) bg-(--surface-elevated) p-5 text-base">
-              <div className="flex items-center justify-between">
-                <span className="text-(--text-muted)">Monthly EMI</span>
-                <span className="font-semibold text-(--heading-color)"><AnimatedCurrency value={manualResult.monthlyEmi} /></span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-(--text-muted)">Principal amount</span>
-                <span className="font-semibold text-(--heading-color)"><AnimatedCurrency value={parsedManualLoanAmount} /></span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-(--text-muted)">Total interest</span>
-                <span className="font-semibold text-(--heading-color)"><AnimatedCurrency value={manualResult.totalInterest} /></span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-(--text-muted)">Total amount</span>
-                <span className="font-semibold text-(--heading-color)"><AnimatedCurrency value={manualResult.totalPayment} /></span>
-              </div>
-            </div>
-          </div>
-          </motion.div>
-        )}
+        </motion.div>
       </div>
     </section>
   );

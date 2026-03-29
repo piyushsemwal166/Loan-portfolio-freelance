@@ -26,41 +26,35 @@ function Navbar() {
       return undefined;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (window.scrollY < 120) {
-          setActiveHash('#home');
-          return;
-        }
+    const updateActiveHashFromScroll = () => {
+      const offset = 110;
 
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visibleEntries.length) {
-          setActiveHash(`#${visibleEntries[0].target.id}`);
-        }
-      },
-      {
-        root: null,
-        rootMargin: '-90px 0px -45% 0px',
-        threshold: [0.2, 0.35, 0.5, 0.7],
-      },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-
-    const onScrollTopCheck = () => {
       if (window.scrollY < 120) {
         setActiveHash('#home');
+        return;
       }
+
+      let currentHash = '#home';
+
+      sections.forEach((section) => {
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+
+        if (window.scrollY + offset >= sectionTop) {
+          currentHash = `#${section.id}`;
+        }
+      });
+
+      setActiveHash(currentHash);
     };
 
-    window.addEventListener('scroll', onScrollTopCheck, { passive: true });
+    updateActiveHashFromScroll();
+
+    window.addEventListener('scroll', updateActiveHashFromScroll, { passive: true });
+    window.addEventListener('resize', updateActiveHashFromScroll);
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', onScrollTopCheck);
+      window.removeEventListener('scroll', updateActiveHashFromScroll);
+      window.removeEventListener('resize', updateActiveHashFromScroll);
     };
   }, [isHomePage]);
 
@@ -109,7 +103,7 @@ function Navbar() {
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="sticky top-0 z-50 border-b border-(--border-color) bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] backdrop-blur-lg"
+      className="fixed inset-x-0 top-0 z-[100] border-b border-(--border-color) bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] backdrop-blur-lg"
     >
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 md:px-8">
         <a

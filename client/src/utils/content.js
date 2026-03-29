@@ -87,7 +87,7 @@ export const partnerBanks = [
 
 export const achievements = [
   { label: 'Loans Processed', value: 1800, suffix: '+' },
-  { label: 'Happy Clients', value: 1200, suffix: '+' },
+  { label: 'Happy Clients', value: 3500, suffix: '+' },
   { label: 'Insurance Wins', value: 450, suffix: '+' },
   { label: 'Cities Served', value: 18, suffix: '+' },
 ];
@@ -135,7 +135,7 @@ export const faqs = [
 
 export const contactDetails = {
   name: 'Manish Dutt',
-  phone: '+91-8557973728',
+  phone: '+91-8557996728',
   email: 'Manishhssht2@gmail.com',
 };
 

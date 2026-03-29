@@ -5,6 +5,7 @@ import AboutSection from '../components/AboutSection';
 import AchievementsSection from '../components/AchievementsSection';
 import BackToTopButton from '../components/BackToTopButton';
 import ContactSection from '../components/ContactSection';
+import ChatbotWidget from '../components/ChatbotWidget';
 import EmiCalculatorSection from '../components/EmiCalculatorSection';
 import FaqSection from '../components/FaqSection';
 import Footer from '../components/Footer';
@@ -77,6 +78,7 @@ function HomePage() {
         </main>
         <Footer />
         <MobileStickyCta />
+        <ChatbotWidget />
         <BackToTopButton />
       </div>
     </div>

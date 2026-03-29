@@ -4,6 +4,7 @@ const express = require('express');
 const path = require('path');
 const connectDb = require('./config/db');
 const contactRoutes = require('./routes/contact');
+const chatRoutes = require('./routes/chat');
 
 dotenv.config({ path: path.join(__dirname, '.env') });
 
@@ -22,6 +23,7 @@ app.get('/api/health', (_req, res) => {
 });
 
 app.use('/api/contact', contactRoutes);
+app.use('/api/chat', chatRoutes);
 
 app.use((err, _req, res, _next) => {
   console.error(err);

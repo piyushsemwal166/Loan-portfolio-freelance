@@ -15,7 +15,7 @@ function MobileStickyCta() {
           <p className="text-sm font-semibold text-(--heading-color)">Get callback in 15 minutes</p>
         </div>
         <a
-          href="tel:+918557973728"
+          href="tel:+918557996728"
           className="inline-flex items-center gap-2 rounded-full bg-(--brand) px-4 py-2 text-xs font-semibold text-white"
         >
           <FaPhone />

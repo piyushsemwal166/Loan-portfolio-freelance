@@ -9,6 +9,7 @@ import {
 } from 'react-icons/fa6';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import ChatbotWidget from '../components/ChatbotWidget';
 import { achievements } from '../utils/content';
 
 const reasons = [
@@ -112,6 +113,7 @@ function WhyChooseUsPage() {
         </main>
 
         <Footer />
+        <ChatbotWidget />
       </div>
     </div>
   );
